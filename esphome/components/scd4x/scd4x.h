@@ -49,6 +49,7 @@ class SCD4XComponent : public PollingComponent, public sensirion_common::Sensiri
   bool ambient_pressure_compensation_;
   uint16_t ambient_pressure_;
   bool enable_asc_;
+  uint32_t measurement_start_millis_;
   MeasurementMode measurement_mode_{PERIODIC};
   sensor::Sensor *co2_sensor_{nullptr};
   sensor::Sensor *temperature_sensor_{nullptr};
