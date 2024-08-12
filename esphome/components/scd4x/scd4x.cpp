@@ -314,7 +314,7 @@ bool SCD4XComponent::start_measurement_() {
       delay(50);  // NOLINT wait 50 ms and try again
     }
     this->status_clear_warning();
-    this->measurment_start_millis_ = millis();
+    this->measurement_start_millis_ = millis();
     return true;
   }
   return false;
