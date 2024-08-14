@@ -23,6 +23,7 @@ class SCD4XComponent : public PollingComponent, public sensirion_common::Sensiri
   void setup() override;
   void dump_config() override;
   void update() override;
+  void on_safe_shutdown() override;
 
   void set_automatic_self_calibration(bool asc) { enable_asc_ = asc; }
   void set_altitude_compensation(uint16_t altitude) { altitude_compensation_ = altitude; }

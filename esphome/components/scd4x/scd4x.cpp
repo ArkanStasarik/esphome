@@ -210,6 +210,16 @@ void SCD4XComponent::update() {
   });  // set_timeout
 }
 
+void SCD4XComponent::on_safe_shutdown() {
+  if (!this->write_command(SCD4X_CMD_STOP_MEASUREMENTS)) {
+    // stops SCD4X from consumping power doing periodic measurements during deep sleep
+    ESP_LOGE(TAG, "Failed to stop measurements");
+    this->mark_failed();
+    return;
+  }
+  // SCD41 sensors support powering down the sensor. Implemented here
+}
+
 bool SCD4XComponent::perform_forced_calibration(uint16_t current_co2_concentration) {
   /*
     Operate the SCD4x in the operation mode later used in normal sensor operation (periodic measurement, low power
