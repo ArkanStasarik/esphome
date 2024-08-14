@@ -161,11 +161,13 @@ void SCD4XComponent::update() {
     wait_time =
         this->measurement_mode_ == SINGLE_SHOT ? 5000 : 50;  // Single shot measurement takes 5 secs rht mode 50 ms
   } else if ((millis() - this->measurement_start_millis_) < 5000) {
-    //It takes 5 seconds for the first measurement to be available after starting periodic measurement. 
-    //This is a problem when setting update_interval to never and updating manually in a script an immediately entering deep sleep
-    //Therefore wait 5 seconds from the when periodic measurement was started
-    uint32_t wait_time = 5000 - (millis() - this->measurement_start_millis_);
+    // It takes 5 seconds for the first measurement to be available after starting periodic measurement.
+    // This is a problem when setting update_interval to never and updating manually in a script an immediately entering
+    // deep sleep Therefore wait 5 seconds from the when periodic measurement was started
+    uint32_t wait_time = 5000;  // - (millis() - this->measurement_start_millis_);
   }
+
+  ESP_LOGD(TAG, "Wait Time: %zu", wait_time);
 
   this->set_timeout(wait_time, [this]() {
     // Check if data is ready
